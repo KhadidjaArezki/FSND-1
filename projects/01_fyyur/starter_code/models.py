@@ -43,7 +43,7 @@ class Genre(db.Model):
 
     def __repr__(self):
         return f'<Genre {self.id}: {self.name}>'
-
+        
 
 class City(db.Model):
     __tablename__ = 'City'
