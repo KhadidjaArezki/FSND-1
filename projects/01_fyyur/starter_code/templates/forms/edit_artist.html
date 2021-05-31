@@ -52,6 +52,22 @@
           <label for="seeking_description">Seeking Description</label>
           {{ form.seeking_description(class_ = 'form-control', value=artist.seeking_description, autofocus = true) }}
       </div>
+
+      <div class="form-group">
+        <label for="availability_start">Available Starting From</label>
+        {% if artist.availability_start and  artist.availability_end %}
+            {{ form.availability_start(class_ = 'form-control', value=artist.availability_start, autofocus = true) }}
+            <label for="availability_end">to</label>
+            {{ form.availability_end(class_ = 'form-control', value=artist.availability_end, autofocus = true) }}
+
+        {% else %}
+            {{ form.availability_start(class_ = 'form-control', placeholder='HH:MM', autofocus = true) }}
+            <label for="availability_end">to</label>
+            {{ form.availability_end(class_ = 'form-control', placeholder='HH:MM', autofocus = true) }}
+        {% endif %}
+      </div>
+
+
       
       <input type="submit" value="Edit Artist" class="btn btn-primary btn-lg btn-block">
     </form>

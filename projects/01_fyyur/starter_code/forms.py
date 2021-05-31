@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask_wtf import Form
-from wtforms import StringField, SelectField, SelectMultipleField, DateTimeField, BooleanField
+from wtforms import StringField, SelectField, SelectMultipleField, DateTimeField, TimeField, BooleanField
 from wtforms.validators import DataRequired, AnyOf, URL
 
 class ShowForm(Form):
@@ -12,6 +12,11 @@ class ShowForm(Form):
     )
     start_time = DateTimeField(
         'start_time',
+        validators=[DataRequired()],
+        default= datetime.today()
+    )
+    end_time = DateTimeField(
+        'end_time',
         validators=[DataRequired()],
         default= datetime.today()
     )
@@ -234,3 +239,10 @@ class ArtistForm(Form):
             'seeking_description'
      )
 
+    availability_start = TimeField(
+        'availability_start'
+    )
+
+    availability_end = TimeField(
+        'availability_end'
+    )

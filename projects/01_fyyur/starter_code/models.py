@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from sqlalchemy.dialects.postgresql import TIME
 
 #----------------------------------------------------------------------------#
 # App Config.
@@ -49,7 +50,7 @@ class City(db.Model):
     __tablename__ = 'City'
 
     id = db.Column(db.INTEGER, primary_key=True)
-    name = db.Column(db.String, nullable=False, unique=True)
+    name = db.Column(db.String, nullable=False)
     state_id = db.Column(db.INTEGER, db.ForeignKey('State.id'), nullable=False)
 
     def __repr__(self):
@@ -72,14 +73,16 @@ class State(db.Model):
 class Show(db.Model):
     __tablename__ = 'Show'
 
-    venue_id = db.Column(db.INTEGER, db.ForeignKey('Venue.id'), primary_key=True)
-    artist_id = db.Column(db.INTEGER, db.ForeignKey('Artist.id'), primary_key=True)
-    start_time = db.Column(db.DateTime())
+    id = db.Column(db.INTEGER, primary_key=True)
+    venue_id = db.Column(db.INTEGER, db.ForeignKey('Venue.id'), nullable=False)
+    artist_id = db.Column(db.INTEGER, db.ForeignKey('Artist.id'), nullable=False)
+    start_time = db.Column(db.DateTime(), nullable=False)
+    end_time = db.Column(db.DateTime(), nullable=False)
     artist = db.relationship('Artist', back_populates='shows')
     venue = db.relationship('Venue', back_populates='shows')
 
     def __repr__(self):
-        return f'<Show preformed at {self.venue} by {self.artist}>'
+        return f'<Show preformed at {self.venue} by {self.artist} on {self.start_time}>'
 
 #----------------------------------------------------------------------------#
 # Main Models
@@ -119,6 +122,8 @@ class Artist(db.Model):
     website = db.Column(db.String(120), unique=True, nullable=True)
     seeking_venue = db.Column(db.Boolean)
     seeking_description = db.Column(db.String(500))
+    availability_start = db.Column(db.Time())
+    availability_end = db.Column(db.Time())
     genres = db.relationship('Genre', secondary=artist_genres, backref=db.backref('artists', lazy=True))
     shows = db.relationship('Show', back_populates='artist')
 

@@ -4,7 +4,47 @@
 <div class="row">
 	<div class="col-sm-6">
 		<h1>Fyyur 🔥</h1>
-		<p class="lead">Where musical artists meet musical venues.</p>
+        <p class="lead">Where musical artists meet musical venues.</p>
+
+        {% if len(areas) > 0 %}
+            <div id="recent-venues">
+                <p class="lead">Recently Listed Venues</p>
+                {% for area in areas %}
+                    <h4>{{ area.city }}, {{ area.state }}</h4>
+                    <ul class="items">
+                    {% for venue in area.venues %}
+                        <li>
+                            <a href="/venues/{{ venue.id }}">
+                                <i class="fas fa-music"></i>
+                                <div class="item">
+                                    <h5>{{ venue.name }}</h5> 
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        {% if len(artists) > 0 %}
+            <div id="recent-artists">
+                <p class="lead">Recently Listed Artists</p>
+                <ul class="items">
+                {% for artist in artists %}
+                    <li>    
+                        <a href="/artists/{{ artist.id }}">
+                            <i class="fas fa-users"></i>
+                            <div class="item">
+                                <h5>{{ artist.name }}</h5>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
 		<h3>
 			<a href="/venues"><button class="btn btn-primary btn-lg">Find a venue</button></a>
 			<a href="/venues/create"><button class="btn btn-default btn-lg">Post a venue</button></a>

@@ -154,10 +154,15 @@ p > i {
 .description {
   max-width: 450px;
 }
-.genres {
-  margin-bottom: 15px;
+.genres, .availability {
+    margin-bottom: 15px;
+    margin-right: 15px;
 }
-span.genre {
+.info-tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+span.genre , span.availability-start, span.availability-end{
   display: inline-block;
   font-family: monospace;
   padding: 4px 8px;

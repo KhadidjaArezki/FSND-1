@@ -5,15 +5,32 @@
 	<div class="col-sm-6">
 		<h1 class="monospace">
 			{{ artist.name }}
-		</h1>
-		<p class="subtitle">
-			ID: {{ artist.id }}
-		</p>
-		<div class="genres">
-			{% for genre in artist.genres %}
-			<span class="genre">{{ genre }}</span>
-			{% endfor %}
-		</div>
+        </h1>
+        <div class="info-tags">
+            <div class="genres">
+                <p class="subtitle">
+                    ID: {{ artist.id }}
+                </p>
+                <div>
+                    {% for genre in artist.genres %}
+                    <span class="genre">{{ genre }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            {% if artist.availability_start %}
+                <div class="availability">
+                    <p class="subtitle">
+                        Availability:
+                    </p>
+                    <div>
+                        <span class="availability-start">{{ artist.availability_start }}</span>to
+                        <span class="availability-end">{{ artist.availability_end }}</span>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
 		<p>
 			<i class="fas fa-globe-americas"></i> {{ artist.city }}, {{ artist.state }}
 		</p>
