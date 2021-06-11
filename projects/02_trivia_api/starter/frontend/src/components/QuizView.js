@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 
 import '../stylesheets/QuizView.css';
+import '../stylesheets/FormView.css';
 
 const questionsPerPlay = 5; 
+var  today = new Date();
 
 class QuizView extends Component {
   constructor(props){
@@ -16,13 +18,16 @@ class QuizView extends Component {
         numCorrect: 0,
         currentQuestion: {},
         guess: '',
+        name: '',
+        // category_id: null,//this.state.quizCategory['id'],
+        timestamp: today.toLocaleString(),
         forceEnd: false
     }
   }
 
   componentDidMount(){
     $.ajax({
-      url: `/categories`, //TODO: update request URL
+      url: `/categories`, //DONE: update request URL
       type: "GET",
       success: (result) => {
         this.setState({ categories: result.categories })
@@ -48,7 +53,7 @@ class QuizView extends Component {
     if(this.state.currentQuestion.id) { previousQuestions.push(this.state.currentQuestion.id) }
 
     $.ajax({
-      url: '/quizzes', //TODO: update request URL
+      url: '/quizzes', //DONE: update request URL
       type: "POST",
       dataType: 'json',
       contentType: 'application/json',
@@ -76,7 +81,7 @@ class QuizView extends Component {
       }
     })
   }
-
+    
   submitGuess = (event) => {
     event.preventDefault();
     const formatGuess = this.state.guess.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").toLowerCase()
@@ -123,12 +128,63 @@ class QuizView extends Component {
 
   renderFinalScore(){
     return(
-      <div className="quiz-play-holder">
-        <div className="final-header"> Your Final Score is {this.state.numCorrect}</div>
-        <div className="play-again button" onClick={this.restartGame}> Play Again? </div>
-      </div>
-    )
-  }
+        <div>
+            <div className="quiz-play-holder">
+                <div className="final-header"> Your Final Score is {this.state.numCorrect}</div>
+                <div className="play-again button" onClick={this.restartGame}> Play Again? </div>
+            </div>
+            <div id="add-form">
+                <h4> Save Your Game! </h4>
+                <form className="form-view" id="add-game-form" onSubmit={this.submitGame}>
+                    <label>
+                        Username 
+                        <input type="text" name="name" value = {this.state.name} onChange={this.handleChange}/>
+                    </label>
+                    <label>
+                        Category 
+                        <input type="text" name="category" value= {this.state.quizCategory['id']} onChange={this.handleChange}/>
+                    </label>
+                    <label>
+                        Score 
+                        <input type="text" name="score"  value={this.state.numCorrect} onChange={this.handleChange}/>
+                    </label>
+                    <label>
+                        Timestamp 
+                        <input type="text" name="time"  value={this.state.timestamp} onChange={this.handleChange}/>
+                    </label>
+                    <input type="submit" className="button" value="Submit" />
+                </form>
+            </div>
+        </div>
+    )}
+
+    submitGame = (event) => {
+        event.preventDefault();
+        $.ajax({
+          url: '/games', //DONE: update request URL
+          type: "POST",
+          dataType: 'json',
+          contentType: 'application/json',
+          data: JSON.stringify({
+            name: this.state.name,
+            category_id: this.state.quizCategory['id'],
+            timestamp: this.state.timestamp,
+            score: this.state.numCorrect
+          }),
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: (result) => {
+            document.getElementById("add-game-form").reset();
+            return;
+          },
+          error: (error) => {
+            alert('Unable to add game. Please try your request again')
+            return;
+          }
+        })
+      }
 
   evaluateAnswer = () => {
     const formatGuess = this.state.guess.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").toLowerCase()
@@ -164,7 +220,6 @@ class QuizView extends Component {
           </div>
         )
   }
-
 
   render() {
     return this.state.quizCategory

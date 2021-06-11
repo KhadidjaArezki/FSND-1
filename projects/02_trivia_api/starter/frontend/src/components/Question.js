@@ -14,15 +14,15 @@ class Question extends Component {
   }
 
   render() {
-    const { question, answer, category, difficulty } = this.props;
+    const { question, answer, category, difficulty, rating } = this.props;
     return (
       <div className="Question-holder">
         <div className="Question">{question}</div>
         <div className="Question-status">
           <img className="category" src={`${category.toLowerCase()}.svg`}/>
-          <div className="difficulty">Difficulty: {difficulty}</div>
+          <div className="difficulty">Difficulty: {difficulty} </div>&nbsp;
+          <div className="rating">Rating: {rating}</div>
           <img src="delete.png" className="delete" onClick={() => this.props.questionAction('DELETE')}/>
-          
         </div>
         <div className="show-answer button"
             onClick={() => this.flipVisibility()}>

@@ -1,0 +1,101 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Inconnu(e) </title></head><body>
+<h1 id="backend-full-stack-trivia-api">Backend - Full Stack Trivia API</h1>
+<h3 id="installing-dependencies-for-the-backend">Installing Dependencies for the Backend</h3>
+<ol>
+<li>
+<p><strong>Python 3.7</strong> - Follow instructions to install the latest version of python for your platform in the <a href="https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python">python docs</a></p>
+</li>
+<li>
+<p><strong>Virtual Enviornment</strong> - We recommend working within a virtual environment whenever using Python for projects. This keeps your dependencies for each project separate and organaized. Instructions for setting up a virual enviornment for your platform can be found in the <a href="https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/">python docs</a></p>
+</li>
+<li>
+<p><strong>PIP Dependencies</strong> - Once you have your virtual environment setup and running, install dependencies by naviging to the <code>/backend</code> directory and running:
+<code>bash
+pip install -r requirements.txt</code>
+This will install all of the required packages we selected within the <code>requirements.txt</code> file.</p>
+</li>
+<li>
+<p><strong>Key Dependencies</strong></p>
+</li>
+<li>
+<p><a href="http://flask.pocoo.org/">Flask</a>  is a lightweight backend microservices framework. Flask is required to handle requests and responses.</p>
+</li>
+<li>
+<p><a href="https://www.sqlalchemy.org/">SQLAlchemy</a> is the Python SQL toolkit and ORM we'll use handle the lightweight sqlite database. You'll primarily work in app.py and can reference models.py. </p>
+</li>
+<li>
+<p><a href="https://flask-cors.readthedocs.io/en/latest/#">Flask-CORS</a> is the extension we'll use to handle cross origin requests from our frontend server. </p>
+</li>
+</ol>
+<h3 id="database-setup">Database Setup</h3>
+<p>With Postgres running, restore a database using the trivia.psql file provided. From the backend folder in terminal run:
+<code>bash
+psql trivia &lt; trivia.psql</code></p>
+<h3 id="running-the-server">Running the server</h3>
+<p>From within the <code>./src</code> directory first ensure you are working using your created virtual environment.</p>
+<p>To run the server, execute:</p>
+<p><code>bash
+flask run --reload</code></p>
+<p>The <code>--reload</code> flag will detect file changes and restart the server automatically.</p>
+<h2 id="todo-tasks">ToDo Tasks</h2>
+<p>These are the files you'd want to edit in the backend:</p>
+<ol>
+<li><em>./backend/flaskr/<code>__init__.py</code></em></li>
+<li><em>./backend/test_flaskr.py</em></li>
+</ol>
+<p>One note before you delve into your tasks: for each endpoint, you are expected to define the endpoint and response data. The frontend will be a plentiful resource because it is set up to expect certain endpoints and response data formats already. You should feel free to specify endpoints in your own way; if you do so, make sure to update the frontend or you will get some unexpected behavior. </p>
+<ol>
+<li>
+<p>Use Flask-CORS to enable cross-domain requests and set response headers. </p>
+</li>
+<li>
+<p>Create an endpoint to handle GET requests for questions, including pagination (every 10 questions). This endpoint should return a list of questions, number of total questions, current category, categories. </p>
+</li>
+<li>
+<p>Create an endpoint to handle GET requests for all available categories. </p>
+</li>
+<li>
+<p>Create an endpoint to DELETE question using a question ID. </p>
+</li>
+<li>
+<p>Create an endpoint to POST a new question, which will require the question and answer text, category, and difficulty score. </p>
+</li>
+<li>
+<p>Create a POST endpoint to get questions based on category. </p>
+</li>
+<li>
+<p>Create a POST endpoint to get questions based on a search term. It should return any questions for whom the search term is a substring of the question. </p>
+</li>
+<li>
+<p>Create a POST endpoint to get questions to play the quiz. This endpoint should take category and previous question parameters and return a random questions within the given category, if provided, and that is not one of the previous questions. </p>
+</li>
+<li>
+<p>Create error handlers for all expected errors including 400, 404, 422 and 500. </p>
+</li>
+</ol>
+<h2 id="review-comment-to-the-students">Review Comment to the Students</h2>
+<p>```
+This README is missing documentation of your endpoints. Below is an example for your endpoint to get all categories. Please use it as a reference for creating your documentation and resubmit your code. </p>
+<p>Endpoints
+GET '/api/v1.0/categories'
+GET ...
+POST ...
+DELETE ...</p>
+<p>GET '/api/v1.0/categories'
+- Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
+- Request Arguments: None
+- Returns: An object with a single key, categories, that contains a object of id: category_string key:value pairs. 
+{'1' : "Science",
+'2' : "Art",
+'3' : "Geography",
+'4' : "History",
+'5' : "Entertainment",
+'6' : "Sports"}</p>
+<p>```</p>
+<h2 id="testing">Testing</h2>
+<p>To run the tests, run
+<code>dropdb trivia_test
+createdb trivia_test
+psql trivia_test &lt; trivia.psql
+python test_flaskr.py</code></p>
+</body></html>
