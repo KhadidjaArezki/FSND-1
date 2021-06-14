@@ -1,12 +1,11 @@
 import os
-from config import environ
 from sqlalchemy import Column, String, Integer, create_engine
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import json
 
-database_name = environ['production_database_name']
-database_path = '{}/{}'.format(environ['database_path'], database_name)
+database_name = "trivia"
+database_path = "postgresql://{}@{}/{}".format('postgres:12345', 'localhost:5432', database_name)
 
 db = SQLAlchemy()
 
@@ -14,7 +13,6 @@ db = SQLAlchemy()
 setup_db(app)
     binds a flask application and a SQLAlchemy service
 '''
-
 def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -22,13 +20,13 @@ def setup_db(app, database_path=database_path):
     db.init_app(app)
     migrate = Migrate(app, db)
     # db.create_all()
-
+    
 
 '''
 Question
 
 '''
-class Question(db.Model):
+class Question(db.Model):  
     __tablename__ = 'questions'
 
     id = Column(Integer, primary_key=True)
@@ -70,22 +68,21 @@ class Question(db.Model):
             'rating': self.rating
         }
 
-
 '''
 Category
 
 '''
-class Category(db.Model):
+class Category(db.Model):  
     __tablename__ = 'categories'
 
     id = Column(Integer, primary_key=True)
     type = Column(String, unique=True)
-    games = db.relationship('Games', back_populates='category')
+    games =  db.relationship('Games', back_populates='category')
 
     def __init__(self, type, games):
         self.type = type
         self.games = games
-
+    
     def insert(self):
         db.session.add(self)
         db.session.commit()
@@ -120,9 +117,8 @@ class Games(db.Model):
     
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, db.ForeignKey('users.id'), nullable=False)
-    score = Column(Integer, nullable=False)
-    category_id = Column(Integer, db.ForeignKey(
-                                'categories.id'), nullable=True)
+    score = Column(Integer,nullable=False)
+    category_id = Column(Integer, db.ForeignKey('categories.id'), nullable=True)
     time = db.Column(db.DateTime(), nullable=True)
     player = db.relationship('User', back_populates='games')
     category = db.relationship('Category', back_populates='games')

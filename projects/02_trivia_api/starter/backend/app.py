@@ -1,6 +1,5 @@
 import os
 import sys
-import logging
 from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug import exceptions
@@ -9,9 +8,6 @@ import random
 
 from models import db, setup_db, Question, Category, User, Games
 
-logging.basicConfig(filename='error.log',
-                    level=logging.DEBUG, 
-                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
 QUESTIONS_PER_PAGE = 10
 
 
@@ -21,8 +17,7 @@ def create_app(test_config=None):
     setup_db(app)
 
     '''
-    @DONE: Set up CORS. Allow '*' for origins.
-    Delete the sample route after completing the TODOs
+    @DONE: Set up CORS. Allow '*' for origins. Delete the sample route after completing the TODOs
     '''
     CORS(app, resources={r"/*": {"origins": "*"}})
     '''
@@ -30,31 +25,23 @@ def create_app(test_config=None):
     '''
     @app.after_request
     def after_request(response):
-        response.headers.add('Access-Control-Allow-Headers',
-                                'Content-Type, Authorization, true')
-        response.headers.add('Access-Control-Allow-Methods',
-                                'GET, POST, PUT, PATCH, DELETE, OPTIONS')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization, true')
+        response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
         return response
-
+    
     ######################################################
     # Helper Method for get_questions
 
-    def paginate_questions(request):
+    def paginate_questions(request, questions):
         '''
-        Returns question objects paginated by
+        Returns question objects paginated by 
         a number (QUESTIONS_PER_PAGE)
         '''
         page = request.args.get('page', 1, type=int)
-        questions = Question.query.paginate(
-                        page=page,
-                        per_page=QUESTIONS_PER_PAGE,
-                        max_per_page=10).items
-
-        formatted_questions = [
-            question.format()
-            for question in questions
-        ]
-        return formatted_questions
+        start = (page - 1) * QUESTIONS_PER_PAGE
+        end = start + QUESTIONS_PER_PAGE
+        formatted_questions = [question.format() for question in questions]
+        return formatted_questions[start:end]
 
     #######################################################
     # Helper Method for create_question
@@ -70,16 +57,13 @@ def create_app(test_config=None):
             rating = request_json['rating']
             category_id = int(request_json['category'])
 
-            category = Category.query.get(category_id)
+            category = Category.query.get(category_id)                
             if category is None:
                 raise exceptions.UnprocessableEntity()
-
+            
             else:
-                new_question = Question(question=question,
-                                        answer=answer,
-                                        difficulty=difficulty,
-                                        category=category_id,
-                                        rating=rating)
+                new_question = Question(question=question, answer=answer, 
+                    difficulty=difficulty, category=category_id, rating=rating)
                 return new_question
 
     #######################################################
@@ -88,7 +72,7 @@ def create_app(test_config=None):
     def get_question_objects(request_object):
         '''
         Get question objects by category if provided
-        otherwise, returm them all
+        otherwise, returm them all  
         '''
         if request_object['quiz_category'].get('id') == 0:
             question_objects = Question.query.all()
@@ -97,11 +81,10 @@ def create_app(test_config=None):
             category_id = quiz_category.get('id')
             category = Category.query.get(category_id)
             if category is None:
-                raise exceptions.UnprocessableEntity()
+                raise exceptions.UnprocessableEntity() 
             else:
-                question_objects = Question.query.\
-                                    filter_by(category=category_id).all()
-
+                question_objects = Question.query.filter_by(category=category_id).all()
+        
         return question_objects
 
     def get_unasked_questions(previous_questions, all_questions):
@@ -109,14 +92,14 @@ def create_app(test_config=None):
             previous_questions = []
 
         unasked_questions = [
-            id for id in all_questions
-            if id not in previous_questions
+            id for id in all_questions 
+                if id not in previous_questions
             ]
         return unasked_questions
 
     def get_random_question(unasked_questions, question_objects):
         '''
-        Get a random question id and return the
+        Get a random question id and return the 
         corresponding question object
         '''
         random_question_id = random.choice(unasked_questions)
@@ -124,7 +107,7 @@ def create_app(test_config=None):
             if question.id == random_question_id:
                 return question 
         raise exceptions.InternalServerError()
-
+    
     '''
     @DONE: 
     Create an endpoint to handle GET requests 
@@ -143,10 +126,10 @@ def create_app(test_config=None):
                 for category in category_objects:
                     categories[category.id] = category.type
                 return jsonify({
-                    'success': True,
-                    'categories': categories, 
+                    'success' : True,
+                    'categories' : categories, 
                     })
-
+        
         except exceptions.NotFound:
             abort(404)
         except exceptions.BadRequest:
@@ -155,9 +138,10 @@ def create_app(test_config=None):
             abort(405)
         except exceptions.InternalServerError:
             abort(500)
-        except Exception as e:
-            logging.error(e)
+        except:
             print(sys.exc_info())
+
+
 
     '''
     @DONE: 
@@ -168,8 +152,7 @@ def create_app(test_config=None):
 
     TEST: At this point, when you start the application
     you should see questions and categories generated,
-    ten questions per page and pagination at the bottom of
-    the screen for three pages.
+    ten questions per page and pagination at the bottom of the screen for three pages.
     Clicking on the page numbers should update the questions. 
 
     '''
@@ -177,7 +160,7 @@ def create_app(test_config=None):
     def get_questions():
         try:
             questions = Question.query.all()
-            formatted_questions = paginate_questions(request)
+            formatted_questions = paginate_questions(request, questions)
 
             if len(formatted_questions) == 0:
                 raise exceptions.NotFound()
@@ -189,11 +172,11 @@ def create_app(test_config=None):
 
                 current_category = 'History'
                 return jsonify({
-                    'success': True,
-                    'questions': formatted_questions,
-                    'total_questions': len(questions),
-                    'categories': categories,
-                    'current_category': current_category
+                    'success' : True,
+                    'questions' : formatted_questions,
+                    'total_questions' : len(questions),
+                    'categories' : categories,
+                    'current_category' : current_category
                 })
 
         except exceptions.NotFound:
@@ -204,16 +187,14 @@ def create_app(test_config=None):
             abort(405)
         except exceptions.InternalServerError:
             abort(500)
-        except Exception as e:
-            logging.error(e)
+        except:
             print(sys.exc_info())
 
     '''
     @DONE: 
     Create an endpoint to DELETE question using a question ID. 
 
-    TEST: When you click the trash icon next to a question,
-    the question will be removed.
+    TEST: When you click the trash icon next to a question, the question will be removed.
     This removal will persist in the database and when you refresh the page. 
     '''
     @app.route('/questions/<int:question_id>', methods=['DELETE'])
@@ -225,8 +206,8 @@ def create_app(test_config=None):
             else:
                 question.delete()
                 return jsonify({
-                    'success': True,
-                    'deleted': question_id,
+                    'success' : True,
+                    'deleted' : question_id,
                 })
 
         except exceptions.NotFound:
@@ -238,12 +219,11 @@ def create_app(test_config=None):
         except exceptions.InternalServerError:
             db.session.rollback()
             abort(500)
-        except Exception as e:
-            logging.error(e)
+        except:
             print(sys.exc_info())
 
         finally:
-            db.session.close()
+                db.session.close()
 
     '''
     @DONE: 
@@ -252,8 +232,7 @@ def create_app(test_config=None):
     category, and difficulty score.
 
     TEST: When you submit a question on the "Add" tab, 
-    the form will clear and the question will appear at
-    the end of the last page
+    the form will clear and the question will appear at the end of the last page
     of the questions list in the "List" tab.  
     '''
     @app.route('/questions', methods=['POST'])
@@ -267,7 +246,7 @@ def create_app(test_config=None):
                 new_question = validate_question(request_json)
                 new_question.insert()
                 return jsonify({
-                    'success': True
+                    'success' : True
                 })
 
         except exceptions.BadRequest:
@@ -283,12 +262,12 @@ def create_app(test_config=None):
         except exceptions.InternalServerError:
             db.session.rollback()
             abort(500)
-        except Exception as e:
-            logging.error(e)
+        except:
             print(sys.exc_info())
 
         finally:
             db.session.close()
+
 
     @app.route('/categories', methods=['POST'])
     def create_category():
@@ -306,9 +285,9 @@ def create_app(test_config=None):
                     category.insert()
 
                     return jsonify({
-                            'success': True
+                            'success' : True
                         })
-
+                         
         except exceptions.BadRequest:
             abort(400)
         except exceptions.MethodNotAllowed:
@@ -322,8 +301,7 @@ def create_app(test_config=None):
         except exceptions.InternalServerError:
             db.session.rollback()
             abort(500)
-        except Exception as e:
-            logging.error(e)
+        except:
             print(sys.exc_info())
 
         finally:
@@ -342,7 +320,7 @@ def create_app(test_config=None):
     @app.route('/questions/search', methods=['POST'])
     def search_questions():
         try:
-            request_object = request.get_json()
+            request_object =  request.get_json()
             if request_object is None:
                 raise exceptions.BadRequest()
             else:
@@ -350,17 +328,14 @@ def create_app(test_config=None):
                 search = '%{}%'.format(search_term)
                 question_objects = Question.query.filter(
                     Question.question.ilike(search)).all()
-                questions = [
-                    question.format()
-                    for question in question_objects
-                ]
+                questions = [question.format() for question in question_objects]
                 category_str = 'History'
 
                 return jsonify({
-                    'success': True,
-                    'questions': questions,
-                    'total_questions': len(questions),
-                    'current_category': category_str
+                    'success' : True,
+                    'questions' : questions,
+                    'total_questions' : len(questions),
+                    'current_category' : category_str
                 })
 
         except exceptions.BadRequest:
@@ -372,9 +347,10 @@ def create_app(test_config=None):
             abort(422)
         except exceptions.InternalServerError:
             abort(500)
-        except Exception as e:
-            logging.error(e)
+        except:
             print(sys.exc_info())    
+
+
 
     '''
     @DONE: 
@@ -391,20 +367,15 @@ def create_app(test_config=None):
             if category_object is None:
                 raise exceptions.NotFound()
             else:
-                question_objects = Question.query\
-                                    .filter_by(category=category_id)\
-                                    .all()
-                questions = [
-                    question.format()
-                    for question in question_objects
-                ]
+                question_objects = Question.query.filter_by(category=category_id).all()
+                questions = [question.format() for question in question_objects]
                 category_str = category_object.type
-      
+                
                 return jsonify({
-                    'success': True,
-                    'questions': questions,
-                    'total_questions': len(questions),
-                    'current_category': category_str
+                    'success' : True,
+                    'questions' : questions,
+                    'total_questions' : len(questions),
+                    'current_category' : category_str
                 })
 
         except exceptions.NotFound:
@@ -415,9 +386,9 @@ def create_app(test_config=None):
             abort(405)
         except exceptions.InternalServerError:
             abort(500)
-        except Exception as e:
-            logging.error(e)
+        except:
             print(sys.exc_info())      
+        
 
     '''
     @DONE: 
@@ -440,19 +411,14 @@ def create_app(test_config=None):
                 previous_questions = request_object['previous_questions']
 
                 question_objects = get_question_objects(request_object)
-                all_questions = [
-                    question.id
-                    for question in question_objects
-                ]
+                all_questions = [question.id for question in question_objects]
 
-                unasked_questions = get_unasked_questions(
-                                    previous_questions, all_questions)
-                random_question = get_random_question(
-                                    unasked_questions, question_objects)
+                unasked_questions = get_unasked_questions(previous_questions, all_questions)
+                random_question = get_random_question(unasked_questions, question_objects)
 
                 return jsonify({
-                    'success': True,
-                    'question': random_question.format()
+                    'success' : True,
+                    'question' : random_question.format()
                 })
 
         except exceptions.BadRequest:
@@ -467,10 +433,10 @@ def create_app(test_config=None):
             abort(422)
         except exceptions.InternalServerError:
             abort(500)
-        except Exception as e:
-            logging.error(e)
+        except:
             print('Unexpected error', sys.exc_info())
             abort(500)
+
 
     @app.route('/games', methods=['POST'])
     def save_game():
@@ -489,8 +455,7 @@ def create_app(test_config=None):
                 score = request_object['score']
                 time = request_object['timestamp']
 
-                user = User.query.filter_by(name=name)\
-                                .one_or_none()
+                user = User.query.filter_by(name=name).one_or_none()
                 if user is None:
                     user = User(name=name, games=[])
                     db.session.add(user)
@@ -499,10 +464,8 @@ def create_app(test_config=None):
                 else:
                     user_id = user.id
 
-                game = Games(user_id=user_id, score=score, 
-                                category_id=category_id, 
-                                time=time, player=user,
-                                category=Category.query.get(category_id))
+                game = Games(user_id=user_id, score=score, category_id=category_id, 
+                    time=time, player=user, category=Category.query.get(category_id))
                 user.games.append(game)
                 db.session.add(game)
                 db.session.commit()
@@ -524,12 +487,12 @@ def create_app(test_config=None):
         except exceptions.InternalServerError:
             db.session.rollback()
             abort(500)
-        except Exception as e:
-            logging.error(e)
+        except:
             print(sys.exc_info())
 
         finally:
             db.session.close()
+
 
     '''
     @DONE: 
@@ -538,16 +501,14 @@ def create_app(test_config=None):
     '''
     @app.errorhandler(400)
     def bad_request(error):
-        logging.error(error)
         return jsonify({
-            "success": False,
-            "error": 400,
-            "message": "Bad Request",
+            "success" : False,
+            "error" : 400,
+            "message" : "Bad Request",
         }), 400
 
     @app.errorhandler(404)
     def not_found(error):
-        logging.error(error)
         return jsonify({
             "success": False, 
             "error": 404,
@@ -556,29 +517,31 @@ def create_app(test_config=None):
     
     @app.errorhandler(405)
     def method_not_allowed(error):
-        logging.error(error)
         return jsonify({
-            "success": False,
-            "error": 405,
-            "message": "Method Not Allowed"
+            "success" : False,
+            "error" : 405,
+            "message" : "Method Not Allowed"
         }), 405
     
     @app.errorhandler(422)
     def uprocessable(error):
-        logging.error(error)
         return jsonify({
-            "success": False,
-            "error": 422,
-            "message": "Unprocessable",
+            "success" : False,
+            "error" : 422,
+            "message" : "Unprocessable",
         }), 422
 
     @app.errorhandler(500)
     def internal_server_error(error):
-        logging.error(error)
         return jsonify({
-            "success": False,
-            "error": 500,
-            "message": "Internal Server Error"
+            "success" : False,
+            "error" : 500,
+            "message" : "Internal Server Error"
         }), 500
+
     
+    
+
     return app
+
+    

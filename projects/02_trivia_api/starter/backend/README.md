@@ -27,14 +27,6 @@ With Postgres running, restore a database using the trivia.psql file provided. F
 ```bash
 psql trivia < trivia.psql
 ```
-For Windows run:
-'''
-psql -d trivia -a -f "trivia.psql"
-'''
-
-### Configuration
-Configure your database connection in `config.py`.
-Inside this file, setup environment variables to connect to your database server.
 
 ### Running the server
 
@@ -51,7 +43,7 @@ The `--reload` flag will detect file changes and restart the server automaticall
 ## ToDo Tasks
 These are the files you'd want to edit in the backend:
 
-1. *./backend/app.py
+1. *./backend/flaskr/`__init__.py`*
 2. *./backend/test_flaskr.py*
 
 
@@ -295,15 +287,6 @@ createdb trivia_test
 psql trivia_test < trivia.psql
 python test_flaskr.py
 ```
-For Windows run:
-```
-psql -U <owner> -c "drop database trivia_test;"
-psql -U <owner> -c "create database trivia_test;"
-psql -U <owner> -d trivia_test -a -f "trivia.psql"
-python test_flaskr.py
-
-```
-
 ## Authors: the API and the test suite were developed by Khadidja Arezki
 ## Acknowledgements: Special thanks for the Udacity team for providing the frontend, the models, and database, 
     as well as taking care of dependencies and configuration.
