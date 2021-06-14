@@ -23,3 +23,54 @@ INFO:werkzeug: * Restarting with watchdog (windowsapi)
 2021-06-14 01:01:32,003 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 01:01:32] "GET /questions?page=1 HTTP/1.1" 200 -
 2021-06-14 01:01:32,253 ERROR root 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
 2021-06-14 01:01:32,253 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 01:01:32] "[33mGET /music.svg HTTP/1.1[0m" 404 -
+2021-06-14 13:48:48,094 INFO werkzeug  * Restarting with watchdog (windowsapi)
+2021-06-14 13:48:53,361 INFO werkzeug  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-06-14 13:51:56,388 ERROR root 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+2021-06-14 13:51:56,560 ERROR root 422 Unprocessable Entity: The request was well-formed but was unable to be followed due to semantic errors.
+2021-06-14 13:51:56,948 ERROR root 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+2021-06-14 13:51:57,120 ERROR root 422 Unprocessable Entity: The request was well-formed but was unable to be followed due to semantic errors.
+2021-06-14 13:51:57,495 ERROR root 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2021-06-14 13:51:58,184 ERROR root 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2021-06-14 13:51:58,748 ERROR root 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+2021-06-14 13:51:58,920 ERROR root 422 Unprocessable Entity: The request was well-formed but was unable to be followed due to semantic errors.
+2021-06-14 13:51:59,318 ERROR root 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+2021-06-14 13:51:59,486 ERROR root 422 Unprocessable Entity: The request was well-formed but was unable to be followed due to semantic errors.
+2021-06-14 13:51:59,830 ERROR root 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+2021-06-14 13:52:00,003 ERROR root 422 Unprocessable Entity: The request was well-formed but was unable to be followed due to semantic errors.
+2021-06-14 13:56:05,812 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 13:56:05] "GET /questions?page=1 HTTP/1.1" 200 -
+2021-06-14 13:56:06,168 ERROR root 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2021-06-14 13:56:06,168 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 13:56:06] "[33mGET /music.svg HTTP/1.1[0m" 404 -
+2021-06-14 13:57:28,107 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 13:57:28] "GET /categories/1/questions HTTP/1.1" 200 -
+2021-06-14 13:57:49,461 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 13:57:49] "GET /categories/1/questions HTTP/1.1" 200 -
+2021-06-14 13:57:55,182 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 13:57:55] "GET /categories/1/questions HTTP/1.1" 200 -
+2021-06-14 13:58:03,614 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 13:58:03] "GET /categories/5/questions HTTP/1.1" 200 -
+2021-06-14 13:58:07,488 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 13:58:07] "GET /questions?page=1 HTTP/1.1" 200 -
+2021-06-14 13:58:07,733 ERROR root 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2021-06-14 13:58:07,736 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 13:58:07] "[33mGET /music.svg HTTP/1.1[0m" 404 -
+2021-06-14 13:58:12,662 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 13:58:12] "POST /questions/search HTTP/1.1" 200 -
+2021-06-14 13:58:19,063 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 13:58:19] "GET /categories HTTP/1.1" 200 -
+2021-06-14 14:00:23,916 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:00:23] "POST /questions HTTP/1.1" 200 -
+2021-06-14 14:00:26,216 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:00:26] "GET /questions?page=1 HTTP/1.1" 200 -
+2021-06-14 14:00:26,455 ERROR root 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2021-06-14 14:00:26,458 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:00:26] "[33mGET /music.svg HTTP/1.1[0m" 404 -
+2021-06-14 14:00:29,265 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:00:29] "GET /categories/7/questions HTTP/1.1" 200 -
+2021-06-14 14:00:45,092 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:00:45] "GET /categories HTTP/1.1" 200 -
+2021-06-14 14:00:47,707 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:00:47] "POST /quizzes HTTP/1.1" 200 -
+2021-06-14 14:00:50,312 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:00:50] "GET /categories HTTP/1.1" 200 -
+2021-06-14 14:01:03,252 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:01:03] "POST /quizzes HTTP/1.1" 200 -
+2021-06-14 14:01:15,777 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:01:15] "POST /quizzes HTTP/1.1" 200 -
+2021-06-14 14:01:27,527 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:01:27] "POST /quizzes HTTP/1.1" 200 -
+2021-06-14 14:01:43,589 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:01:43] "POST /quizzes HTTP/1.1" 200 -
+2021-06-14 14:01:54,000 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:01:54] "POST /quizzes HTTP/1.1" 200 -
+2021-06-14 14:02:06,087 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:02:06] "POST /quizzes HTTP/1.1" 200 -
+2021-06-14 14:02:18,470 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:02:18] "POST /games HTTP/1.1" 200 -
+2021-06-14 14:03:08,019 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:03:08] "GET /questions?page=1 HTTP/1.1" 200 -
+2021-06-14 14:03:08,347 ERROR root 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2021-06-14 14:03:08,350 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:03:08] "[33mGET /music.svg HTTP/1.1[0m" 404 -
+2021-06-14 14:03:12,783 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:03:12] "GET /categories/1/questions HTTP/1.1" 200 -
+2021-06-14 14:03:16,851 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:03:16] "GET /categories/7/questions HTTP/1.1" 200 -
+2021-06-14 14:03:20,622 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:03:20] "GET /categories/9/questions HTTP/1.1" 200 -
+2021-06-14 14:03:22,609 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:03:22] "GET /categories/7/questions HTTP/1.1" 200 -
+2021-06-14 14:03:28,562 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:03:28] "DELETE /questions/33 HTTP/1.1" 200 -
+2021-06-14 14:03:28,617 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:03:28] "GET /questions?page=1 HTTP/1.1" 200 -
+2021-06-14 14:03:31,165 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 14:03:31] "GET /categories/7/questions HTTP/1.1" 200 -
