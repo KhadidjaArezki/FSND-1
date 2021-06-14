@@ -1,0 +1,25 @@
+ERROR:root:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+INFO:werkzeug:127.0.0.1 - - [14/Jun/2021 00:52:26] "[33mGET / HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [14/Jun/2021 00:52:34] "GET /questions?page=1 HTTP/1.1" 200 -
+ERROR:root:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+INFO:werkzeug:127.0.0.1 - - [14/Jun/2021 00:52:35] "[33mGET /music.svg HTTP/1.1[0m" 404 -
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Detected change in 'C:\\Users\\PC\\Documents\\Khadidja\\Courses\\1MAC_Full-Stack_Development_Track\\PHASE_02\\Final_Projects\\FSND-1\\projects\\02_trivia_api\\starter\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\PC\\Documents\\Khadidja\\Courses\\1MAC_Full-Stack_Development_Track\\PHASE_02\\Final_Projects\\FSND-1\\projects\\02_trivia_api\\starter\\backend\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\PC\\Documents\\Khadidja\\Courses\\1MAC_Full-Stack_Development_Track\\PHASE_02\\Final_Projects\\FSND-1\\projects\\02_trivia_api\\starter\\backend\\app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+2021-06-14 00:59:10,941 INFO werkzeug  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-06-14 00:59:25,189 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 00:59:25] "GET /questions?page=1 HTTP/1.1" 200 -
+2021-06-14 00:59:25,488 ERROR root 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2021-06-14 00:59:25,492 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 00:59:25] "[33mGET /music.svg HTTP/1.1[0m" 404 -
+2021-06-14 01:01:21,497 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 01:01:21] "GET /categories HTTP/1.1" 200 -
+2021-06-14 01:01:23,621 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 01:01:23] "POST /quizzes HTTP/1.1" 200 -
+2021-06-14 01:01:28,320 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 01:01:28] "GET /categories HTTP/1.1" 200 -
+2021-06-14 01:01:29,993 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 01:01:29] "GET /questions?page=1 HTTP/1.1" 200 -
+2021-06-14 01:01:30,217 ERROR root 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2021-06-14 01:01:30,226 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 01:01:30] "[33mGET /music.svg HTTP/1.1[0m" 404 -
+2021-06-14 01:01:32,003 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 01:01:32] "GET /questions?page=1 HTTP/1.1" 200 -
+2021-06-14 01:01:32,253 ERROR root 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2021-06-14 01:01:32,253 INFO werkzeug 127.0.0.1 - - [14/Jun/2021 01:01:32] "[33mGET /music.svg HTTP/1.1[0m" 404 -
