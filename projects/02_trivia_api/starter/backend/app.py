@@ -426,7 +426,6 @@ def create_app(test_config=None):
         except exceptions.MethodNotAllowed:
             abort(405)
         except KeyError:
-            print('A json key error occured')
             abort(422)
         except exceptions.UnprocessableEntity:
             print('Category is probably non existent')

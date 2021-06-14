@@ -43,7 +43,7 @@ The `--reload` flag will detect file changes and restart the server automaticall
 ## ToDo Tasks
 These are the files you'd want to edit in the backend:
 
-1. *./backend/flaskr/`__init__.py`*
+1. *./backend/app.py*
 2. *./backend/test_flaskr.py*
 
 
