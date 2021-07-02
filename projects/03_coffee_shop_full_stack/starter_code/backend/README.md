@@ -37,7 +37,7 @@ From within the `./src` directory first ensure you are working using your create
 Each time you open a new terminal session, run:
 
 ```bash
-export FLASK_APP=api.py;
+export FLASK_APP=app.py;
 ```
 
 To run the server, execute:
@@ -83,3 +83,122 @@ There are `@TODO` comments throughout the `./backend/src`. We recommend tackling
 
 1. `./src/auth/auth.py`
 2. `./src/api.py`
+
+### Endpoints
+GET '/drinks'
+GET '/drinks-detail'
+POST '/drinks'
+PATCH '/drinks/<int:id>'
+DELETE '/drinks/<int:id>'
+
+## GET '/drinks'
+- Public endpoint that fetches a list of drinks - a short representation format is used -
+    containing the name of the drink as well as the amount and the colour of the ingredients.
+- Request arguments: none
+- Returns: a list of objects that contain three keys: 'id' - an integer > 0, 'recipe' - a list of 
+    ingredient objects with two keys ('color' and 'parts'), and 'title': the name of the drink.
+'''{
+    "drinks": [
+        {
+            "id": 1,
+            "recipe": [
+                {
+                    "color": "lightblue",
+                    "parts": 1
+                },
+                {
+                    "color": "blue",
+                    "parts": 3
+                }
+            ],
+            "title": "icedwater"
+        }
+    ],
+    "success": true
+}'''
+
+## GET '/drinks-detail'
+- Fetches a list of drinks - a long representation format is used -
+- Requires permisson.
+    containing the name of the drink as well as the amount, name and colour of the ingredients.
+- Request arguments: none
+- Returns: a list of objects that contain three keys: 'id' - an integer > 0, 'recipe' - a list of 
+    ingredient objects with three keys ('color', 'name', and 'parts'), and 'title': the name of the drink.
+'''{
+    "drinks": [
+        {
+            "id": 1,
+            "recipe": [
+                {
+                    "color": "lightblue",
+                    "name": "ice",
+                    "parts": 1
+                },
+                {
+                    "color": "blue",
+                    "name": "water",
+                    "parts": 3
+                }
+            ],
+            "title": "icedwater"
+        }
+    ],
+    "success": true
+}'''
+
+## POST '/drinks'
+- Creates a new drink using the submitted title and recipe.
+- Requires permisson.
+- Sample request: curl "http://127.0.0.1:5000/drinks" -X POST -H "Content-Type: application/json" 
+    -d "{'id': -1, 'title': 'leben', 'recipe': [{'name': 'sour milk', 'color': 'lightgrey', 'parts': 1}]}"
+- Returns: a list of drinks containing the newly created drink.
+'''{
+            "drinks": [
+                {
+                    'id': 2,
+                    'title': leben,
+                    'recipe': [
+                        {
+                            'name': 'sour milk',
+                            'color': 'lightgrey',
+                            'parts': 1
+                        }
+                    ]
+                }
+            ]
+            "success": True,
+        }'''
+
+## PATCH '/drinks/<int:id>'
+- Updates the drink corresponding to the provided id.
+- Requires permisson.
+- Request parameters: id
+- Sample request: curl "http://127.0.0.1:5000/drinks" -X POST -H "Content-Type: application/json" 
+    -d "{'id': 2, 'title': 'rayeb', 'recipe': [{'name': 'sour milk', 'color': 'lightgrey', 'parts': 1}]}"
+- Returns: a list of drinks containing the updated drink.
+'''{
+            "drinks": [
+                {
+                    'id': 2,
+                    'title': rayeb,
+                    'recipe': [
+                        {
+                            'name': 'sour milk',
+                            'color': 'lightgrey',
+                            'parts': 1
+                        }
+                    ]
+                }
+            ]
+            "success": True,
+        }'''
+
+## DELETE '/drinks/<int:id>'
+- Deletes the drink corresponding to the provided id.
+- Requires permisson.
+- Request parameters: id
+- Returns: id od the deleted drink.
+
+### Authors: the API and the test suite were developed by Khadidja Arezki
+### Acknowledgements: Special thanks for the Udacity team for providing the frontend, the models, and database, 
+    as well as taking care of dependencies and configuration.
