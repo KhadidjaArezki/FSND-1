@@ -1,3 +1,4 @@
+#!./env/Scripts/python
 import os
 import sys
 from flask import Flask, render_template, request, redirect, url_for, jsonify, abort, send_file

@@ -33,8 +33,8 @@ db_drop_and_create_all()
 '''
 
 def db_drop_and_create_all():
-    db.drop_all()
-    db.create_all()
+    # db.drop_all()
+    # db.create_all()
     # add one demo row 
     deal = Deal(
             name='2021 Newest Dell Inspiron 3000 Laptop, 15.6 HD Display, Intel N4020 Processor, 16GB RAM, 512GB PCIe SSD, Online Meeting Ready, Webcam, WiFi, HDMI, Bluetooth, Win10 Home, Black',
