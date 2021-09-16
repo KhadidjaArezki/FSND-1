@@ -7,15 +7,15 @@ ebay_auth = {
     'devid': '242e8a01-6fe5-4588-8ccb-7c4eb6e5618b'
 }
 
-environ['database_owner'] = 'postgres'
-environ['database_password'] = '12345'
-environ['host'] = 'localhost:5432'
-environ['production_database_name'] = "capstone"
-environ['test_database_name'] = "capstone_test"
-environ['database_path'] = "postgresql://{}:{}@{}".format(
-                            environ['database_owner'],
-                            environ['database_password'],
-                            environ['host'])
+# environ['database_owner'] = 'postgres'
+# environ['database_password'] = '12345'
+# environ['host'] = 'localhost:5432'
+# environ['production_database_name'] = "capstone"
+# environ['test_database_name'] = "capstone_test"
+# environ['database_path'] = "postgresql://{}:{}@{}".format(
+#                             environ['database_owner'],
+#                             environ['database_password'],
+#                             environ['host'])
 
 environ['AUTH0_DOMAIN'] = 'fs-webdev.eu.auth0.com'
 environ['ALGORITHMS'] = 'RS256'
