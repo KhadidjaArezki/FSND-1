@@ -1,0 +1,7 @@
+{
+	"domain": "fs-webdev.eu.auth0.com",
+    "client_id": "gWW8EjoeN7mPg52S5yGPqtawBby3LhD1",
+    "audience": "coffeeshop",
+    "redirectUri": "http://127.0.0.1:5000/",
+    "scope": "openid%20profile%20email%20address%20locale"
+}

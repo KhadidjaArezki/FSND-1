@@ -1,0 +1,149 @@
+body {
+	font-size: 14px;
+    line-height: 20px;
+    font-family: sans-serif;
+    color: white;
+    background-color: #212529;
+}
+.hidden {
+	display: none;
+}
+label {
+	margin-bottom: 10px;
+	display: block;
+}
+#loading {
+    margin: 150px;
+}
+#items-container {
+    margin: 10px;
+}
+#search-results button, .edit-alert, .del-alert{
+    width: 100px;
+    height: 35px;
+}
+.alert-product span {
+    float: right;
+}
+.alert-img, .deal-img , .result-img{
+    margin: auto;
+    padding: 1px 5px;
+    border-radius: 5% !important;
+    border: 1px;
+    border-color: #2196F3;
+    display: inline-block;
+}
+.alert-img {
+    width: 90px;
+    height: 90 px;
+
+}
+.deal-img {
+    height: 215px;
+    width: 215px;
+}
+.result-img {
+    width: 145px;
+    height: 145px;
+}
+.alert-product, .deal-product, .result-product {
+	padding: 10px;
+    border: 1px;
+    border-color: #2196F3;
+    vertical-align: top;
+    display: inline-block;
+    width: 75%;
+}
+.item {
+	background-color: #181a1b; 
+    border: 1px;
+    border-color: #2196F3;    
+}
+#login, #logout, #myAlerts, ul.pagination a.page-link{
+    cursor: pointer;
+} 
+.card , .bg-da-dark, #search-box,  .page-link, .form-select, .input-group-text {
+    background-color: #1e2123;
+    color: white;
+}
+.bg-li-dark {
+    background-color: #343638;
+}
+#search-form {
+    margin-top: 70px;
+}
+.form-select>option {
+    width: 217px;
+}
+a, a:link, a:visited {
+    text-decoration-color: none;
+    text-decoration: none;
+    color: rgb(111, 233, 255);
+}
+
+/* Popup snippets from w3schools.com */
+/* Popup container */
+.popupbox .card {
+    background-color: #16191d;
+    margin-top: 80px;
+}
+#button-add-alert, #button-edit-alert{
+    margin-top: 80px;
+}
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* The actual popup (appears on top) */
+.popup .popupbox {
+visibility: hidden;
+width: 500px;
+height: 400px;
+background-color: #16191d;
+color: #fff;
+text-align: center;
+border-radius: 6px;
+padding: 8px 0;
+position: absolute;
+z-index: 1;
+/* bottom: 125%;
+left: 50%; */
+margin-left: 200px;
+margin-top: 200px;
+}
+
+/* Popup arrow */
+.popup .popupbox::after {
+content: "";
+position: absolute;
+top: 100%;
+left: 50%;
+margin-left: -5px;
+border-width: 5px;
+border-style: solid;
+border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+visibility: visible;
+-webkit-animation: fadeIn 1s;
+animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+from {opacity: 0;}
+to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+from {opacity: 0;}
+to {opacity:1 ;}
+}

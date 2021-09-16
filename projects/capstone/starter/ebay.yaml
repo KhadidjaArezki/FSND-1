@@ -1,0 +1,28 @@
+name: ebay_api_config
+
+# Trading API Sandbox - https://www.x.com/developers/ebay/products/trading-api
+api.sandbox.ebay.com:
+    compatability: 719
+    appid: Khadidja-pricetra-SBX-f3633a1dd-428cb13a
+    certid: SBX-3633a1dd0231-6ac0-42bb-aa93-72a3
+    devid: 242e8a01-6fe5-4588-8ccb-7c4eb6e5618b
+    token: AgAAAA**AQAAAA**aAAAAA**ScgrYQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wFk4aiDZaCqAWdj6x9nY+seQ**YakFAA**AAMAAA**2JrP0CUR9tOiRzuB7NUgF6SHxaHYQrhBd9zV+UpQJ05/Ed9lZZBcOqFg/4H1qLZD49m0WFqkv7gQP7nNuQSgV/bxGBEwu7Q1MF72nCPO3wLuGiWtky2LMF/Y5JtT/TlykDd3ZYVnh+bfqhSzH6NyTva77L9VyD2DxydPVSXxhbicwgjs66hv7U1Ccdy58IXYUTtfqtqUXpAuLfWrwQXt4EB/cUzvmQua7fqCuWgTy+xsDE6cJammOpJ+qDKXBvjfBcd8B+ylPHgj/+ZgLDdLX3tai3sBhUn9z7ZfCEvfNAasdU0tTXBBoH/Cd1fKBxOFN91mf2KJyX5Vi9RnDSgr2Th1v2GcddQiGfk7hpf05pBwxAIqQVaGZyNXRMURFsKVnraO4bQPDiqBhll5CxAangJGdt86jN8pmBice7uFXElosdm5u7R8wTh3lSV7jjL0rMXpl45NUl6tXlfWP2aVBzeHqus6vuhPSRa9vw1GCTSiIA1N+iffZp8xWIHhrMVRiuY18ZJqSxYW9UNvCrnJqbrHHkrWYv5FZrnqIPcDC5P4MOlvbGEA741XegKSG3t6dy43XNMu5HhMACguK1IHl7xz0IIwTFXrFYxd/dBXypTAEwijxpp6Lw6TSgtcfUxFi9VamRFQ/pVG+XzQh5WHP3AzHojBns64ddsrh3z/MaacTdGgovFU5a8+oCXx+8YTd+n3+O4Tev9ExGIQVVELg4u8Srpo1xL/tzOj1ZXa3ifAXLIApHeDrtYBwNZhlJVy
+
+# Trading API - https://www.x.com/developers/ebay/products/trading-api
+api.ebay.com:
+    compatability: 719
+    appid: YOUR_APP_ID
+    certid: SBX-3633a1dd0231-6ac0-42bb-aa93-72a3
+    devid: 242e8a01-6fe5-4588-8ccb-7c4eb6e5618b
+    token: AgAAAA**AQAAAA**aAAAAA**ScgrYQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wFk4aiDZaCqAWdj6x9nY+seQ**YakFAA**AAMAAA**2JrP0CUR9tOiRzuB7NUgF6SHxaHYQrhBd9zV+UpQJ05/Ed9lZZBcOqFg/4H1qLZD49m0WFqkv7gQP7nNuQSgV/bxGBEwu7Q1MF72nCPO3wLuGiWtky2LMF/Y5JtT/TlykDd3ZYVnh+bfqhSzH6NyTva77L9VyD2DxydPVSXxhbicwgjs66hv7U1Ccdy58IXYUTtfqtqUXpAuLfWrwQXt4EB/cUzvmQua7fqCuWgTy+xsDE6cJammOpJ+qDKXBvjfBcd8B+ylPHgj/+ZgLDdLX3tai3sBhUn9z7ZfCEvfNAasdU0tTXBBoH/Cd1fKBxOFN91mf2KJyX5Vi9RnDSgr2Th1v2GcddQiGfk7hpf05pBwxAIqQVaGZyNXRMURFsKVnraO4bQPDiqBhll5CxAangJGdt86jN8pmBice7uFXElosdm5u7R8wTh3lSV7jjL0rMXpl45NUl6tXlfWP2aVBzeHqus6vuhPSRa9vw1GCTSiIA1N+iffZp8xWIHhrMVRiuY18ZJqSxYW9UNvCrnJqbrHHkrWYv5FZrnqIPcDC5P4MOlvbGEA741XegKSG3t6dy43XNMu5HhMACguK1IHl7xz0IIwTFXrFYxd/dBXypTAEwijxpp6Lw6TSgtcfUxFi9VamRFQ/pVG+XzQh5WHP3AzHojBns64ddsrh3z/MaacTdGgovFU5a8+oCXx+8YTd+n3+O4Tev9ExGIQVVELg4u8Srpo1xL/tzOj1ZXa3ifAXLIApHeDrtYBwNZhlJVy
+
+# Finding API - https://www.x.com/developers/ebay/products/finding-api
+svcs.ebay.com:
+    appid: YOUR_APP_ID
+
+svcs.sandbox.ebay.com:
+    appid: Khadidja-pricetra-SBX-f3633a1dd-428cb13a    
+
+# Shopping API - https://www.x.com/developers/ebay/products/shopping-api
+open.api.ebay.com:
+    appid: YOUR_APP_ID

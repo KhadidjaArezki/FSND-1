@@ -1,0 +1,334 @@
+<!-- Free template dowloaded from https://startbootstrap.com/ -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>pricelee - Track The Products On Your Wishlist</title>
+        <!-- Favicon-->
+        <!-- <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/bootsrap-5.1.0.min.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/styles.css') }}">
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#!">Track Products</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li id="home" class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                        <li id="myAlerts" class="nav-item hidden"><a class="nav-link">My Alerts</a></li>
+                        <li id="login" class="nav-item hidden"><a class="nav-link">Sign in</a></li>
+                        <li id="logout" class="nav-item hidden"><a class="nav-link">Logout</a></li>
+                        <li id="user-profile" class="nav-item hidden"><img class="user-img" src="" width="40" height="40" class="rounded-circle">
+                        <span id="user-name"></span></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page header with logo and tagline-->
+        <header class="py-5 bg-li-dark border-bottom mb-4">
+            <div class="container">
+                <div class="text-center my-5">
+                    <h1 class="fw-bolder">Welcome to pricelee!</h1>
+                    <p class="lead mb-0">A price tracker for products on your wishlist</p>
+                </div>
+            </div>
+        </header>
+        <!-- Page content-->
+        <div class="container">
+            <div class="row">
+                <!-- Display products and user alerts -->
+                <div id="main-content" class="col-lg-8">
+                    <div class="popup col-lg-6">
+                        <div class="popupbox" id="add-popup">
+                            <div class="card mb-4">
+                                <div class="card-header">Add an alert for this product</div>
+                                <div class="card-body">
+                                    <form class="needs-validation" novalidate>
+                                        <div class="input-group has-validation">
+                                            <label for="add-alert-box" class="input-group-text">Desired Price</label>
+                                            <input id="add-alert-box" class="form-control" type="text" placeholder="..." aria-label="..." aria-describedby="inputGroupPrepend" required />
+                                        </div>
+                                        <div><button class="btn btn-primary" id="button-add-alert" type="submit">Add Alert</button></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="popup col-lg-6">
+                        <div class="popupbox" id="edit-popup">
+                            <div class="card mb-4">
+                                <div class="card-header">Edit Alert</div>
+                                <div class="card-body">
+                                    <form class="needs-validation" novalidate>
+                                        <div class="input-group has-validation">
+                                            <label for="edit-alert-box" class="input-group-text">Desired Price</label>
+                                            <input id="edit-alert-box" class="form-control" type="text" placeholder="..." aria-label="..." aria-describedby="inputGroupPrepend" required />
+                                        </div>
+                                        <div><button class="btn btn-primary" id="button-edit-alert" type="submit">Save</button></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                      
+                    <!-- Search results and alerts -->
+                    <div id="items-container">
+                        <div id="loading"class="text-center hidden"><img src="./static/images/ajax-loader.gif"></div>
+                        <div id="recent-alerts">
+                            <!-- <p>You're seeing this content because you're currently <strong>logged in</strong> -->
+                            <!-- <h4>My Recent Alerts</h4> -->
+                        </div>
+                        <div id="paginable">
+                            <div id="user-alerts">
+                            </div>
+                            <div id="search-results">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pagination-->
+                    <nav id="pagination" aria-label="Pagination">
+                        <hr class="my-0" />
+                        <ul class="pagination justify-content-center my-4">
+                        </ul>
+                    </nav>
+
+                    <!-- Sponsered Deals -->
+                    <div class="row">
+                        <div id="deals">
+                            <h4>Deals</h4>
+
+                            {% if len(deals) == 0 %}
+                                <div class="card">
+                                    <p>There are currently no deals to display</p>
+                                </div>
+
+                            {% else %}
+
+                                <div class="card-group mb-4">
+                                {% for deal in deals%}
+                                    <div class="card deal" data-id="{{deal.id}}">
+                                        <div class="card-body">
+                                            <div class="deal-img">
+                                                <img class="card-img-top" src="{{deal.image}}" alt="">
+                                                <div class="small text-muted">{{deal.store}}</div>
+                                            </div>
+                                            <div class="deal-product">
+                                                <a href="{{deal.link}}"><h6 class="card-title">{{deal.name}}</h6></a>
+                                                <div>price: {{deal.currency}} {{deal.price}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                </div>
+
+                            {% endif %}
+                        </div>
+                        <div id="add-deal" class="card hidden">
+                            <div class="card-header">Add Deal</div>
+                            <div class="card-body">
+                                <form class="needs-validation" novalidate>
+                                    <div class="input-group has-validation">
+                                        <label class="input-group-text" for="deal-name">Name</label>
+                                        <input type="text" id="deal-name" class="form-control" placeholder="..." aria-label="..." aria-describedby="inputGroupPrepend" required>
+                                        <div class="invalid-feedback">
+                                            All fields are required!
+                                        </div>
+                                    </div>
+                                    <div class="input-group has-validation">
+                                        <label class="input-group-text" for="deal-link">Link</label>
+                                        <input type="text" id="deal-link" class="form-control" placeholder="..." aria-label="..." aria-describedby="inputGroupPrepend" required>
+                                        <div class="invalid-feedback">
+                                            All fields are required!
+                                        </div>
+                                    </div>
+                                    <div class="input-group has-validation">
+                                        <label class="input-group-text" for="deal-image">Image URL</label>
+                                        <input type="text" id="deal-image" class="form-control" placeholder="..." aria-label="..." aria-describedby="inputGroupPrepend" required>
+                                        <div class="invalid-feedback">
+                                            All fields are required!
+                                        </div>
+                                    </div>
+                                    <div class="input-group has-validation">
+                                        <label class="input-group-text" for="deal-price">Price</label>
+                                        <input type="text" id="deal-price" class="form-control" placeholder="..." aria-label="..." aria-describedby="inputGroupPrepend" required>
+                                        <div class="invalid-feedback">
+                                            All fields are required!
+                                        </div>
+                                    </div>
+                                    <div class="input-group has-validation">
+                                        <label class="input-group-text" for="deal-store">Store</label>
+                                        <input type="text" id="deal-store" class="form-control" placeholder="..." aria-label="..." aria-describedby="inputGroupPrepend" required>
+                                        <div class="invalid-feedback">
+                                            All fields are required!
+                                        </div>
+                                    </div>
+                                    <div class="input-group has-validation">
+                                        <label class="input-group-text" for="deal-currency">Currency</label>
+                                        <input type="text" id="deal-currency" class="form-control" placeholder="..." aria-label="..." aria-describedby="inputGroupPrepend" required>
+                                        <div class="invalid-feedback">
+                                            All fields are required!
+                                        </div>
+                                        <button class="btn btn-primary" id="button-add-deal" type="submit">Add Deal</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Side widgets-->
+                <div id="side-content" class="col-lg-4">
+                    <div class="hidden" id="edit-alert">
+
+                    </div>
+                    <div id="search-form">
+                        <!-- Search widget-->
+                        <div class="card mb-4">
+                            <div class="card-header">Search</div>
+                            <div class="card-body">
+                                <form class="needs-validation" novalidate>
+                                    <div class="input-group has-validation">
+                                        <input id="search-box" class="form-control" type="text" placeholder="Search products..." aria-label="Enter search term..." aria-describedby="inputGroupPrepend" required />
+                                        <button class="btn btn-primary" id="button-search" type="submit">Go!</button>
+                                        <div class="invalid-feedback">
+                                            Please enter a search term.
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div id="search-filters">
+                                        <label>Search Filters</label>
+                                        <div id="location" class="input-group hidden">
+                                            <select class="form-select" id="location-input">
+                                                <option selected>Select...</option>
+                                                <option value="EBAY-US">United States</option>
+                                                <option value="EBAY-ENCA">Canada (English)</option>
+                                                <option value="EBAY-GB">UK</option>
+                                                <option value="EBAY-AU">Australia</option>
+                                                <option value="EBAY-AT">Austria</option>
+                                                <option value="EBAY-FRBE">Belgium (French)</option>
+                                                <option value="EBAY-FR">France</option>
+                                                <option value="EBAY-DE">Germany</option>
+                                                <option value="EBAY-IT">Italy</option>
+                                                <option value="EBAY-NLBE">Belgium (Dutch)</option>
+                                                <option value="EBAY-NL">Netherlands</option>
+                                                <option value="EBAY-ES">Spain</option>
+                                                <option value="EBAY-CH">Switzerland</option>
+                                                <option value="EBAY-HK">Hong Kong</option>
+                                                <option value="EBAY-IN">India</option>
+                                                <option value="EBAY-IE">Ireland</option>
+                                                <option value="EBAY-MY">Malaysia</option>
+                                                <option value="EBAY-FRCA">Canada (French)</option>
+                                                <option value="EBAY-PH">Philippines</option>
+                                                <option value="EBAY-PL">Poland</option>
+                                                <option value="EBAY-SG">Singapore</option>
+                                            </select>
+                                            <label class="input-group-text" for="location-input">Location</label>
+                                        </div>
+                                        <div id="price" class="input-group hidden">
+                                            <select class="form-select" id="price-input">
+                                                <option selected>Select...</option>
+                                                <option value="0-50">under $50</option>
+                                                <option value="50-100">$50 to $100</option>
+                                                <option value="100-200">$100 to $200</option>
+                                                <option value="200-">over $200</option>
+                                            </select>
+                                            <label class="input-group-text" for="price-input">&nbsp;&nbsp;&nbsp;Price&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div id="store" class="input-group hidden">
+                                            <select class="form-select" id="store-input">
+                                                <option >Select...</option>
+                                                <option selected value="ebay">ebay</option>
+                                            </select>
+                                            <label class="input-group-text" for="store-input">&nbsp;&nbsp;&nbsp;Store&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div id="category" class="input-group hidden">
+                                            <select class="form-select" id="category-input">
+                                                <option selected>Select...</option>
+                                                <option value="20081">Antiques</option>
+                                                <option value="550">Art</option>
+                                                <option value="2984">Baby</option>
+                                                <option value="267">Books</option>
+                                                <option value="12576">Business & Industrial</option>
+                                                <option value="625">Cameras & Photo</option>
+                                                <option value="15032">Cell Phones & Accessories</option>
+                                                <option value="11450">Clothing, Shoes & Accessories</option>
+                                                <option value="11116">Coins & Paper Money</option>
+                                                <option value="1">Collectibles</option>
+                                                <option value="58058">Computers/Tablets & Networking</option>
+                                                <option value="293">Consumer Electronics</option>
+                                                <option value="14339">Crafts</option>
+                                                <option value="237">Dolls & Bears</option>
+                                                <option value="11232">DVDs & Movies</option>
+                                                <option value="45100">Entertainment Memorabilia</option>
+                                                <option value="99">Everything Else</option>
+                                                <option value="172008">Gift Cards & Coupons</option>
+                                                <option value="26395">Health & Beauty</option>
+                                                <option value="11700">Home & Garden</option>
+                                                <option value="281">Jewelry & Watches</option>
+                                                <option value="11233">Music</option>
+                                                <option value="619">Musical Instruments & Gear</option>
+                                                <option value="1281">Pet Supplies</option>
+                                                <option value="870">Pottery & Glass</option>
+                                                <option value="10542">Real Estate</option>
+                                                <option value="316">Specialty Services</option>
+                                                <option value="888">Sporting Goods</option>
+                                                <option value="64482">Sports Mem, Cards & Fan Shop</option>
+                                                <option value="260">Stamps</option>
+                                                <option value="1305">Tickets & Experiences</option>
+                                                <option value="220">Toys & Hobbies</option>
+                                                <option value="3252">Travel</option>
+                                                <option value="1249">Video Games & Consoles</option>
+                                            </select>
+                                            <label class="input-group-text" for="category-input">Category</label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="add-filter" class="hidden">
+                        <div class="card mb-4">
+                            <div class="card-header">Add Search Filters</div>
+                            <div class="card-body">
+                                <form class="needs-validation" novalidate>
+                                    <div class="input-group">
+                                        <label for="filter-input" class="input-group-text">Filter</label>
+                                        <select class="form-select" id="filter-input">
+                                            <option selected>Select...</option>
+                                            <option value="location">Location</option>
+                                            <option value="price">Price Range</option>
+                                            <option value="store">Store</option>
+                                            <option value="category">Category</option>
+                                        </select>
+                                        <button class="btn btn-primary" id="button-add-filter" type="submit">Add Filter</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer-->
+        <footer class="py-5 bg-da-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; pricelee 2021</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="https://cdn.auth0.com/js/auth0-spa-js/1.2/auth0-spa-js.production.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+         crossorigin="anonymous"></script>
+        <script  type="module" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+        <script  type="module" src="{{ url_for('static', filename='js/paginate.js')}}"></script>
+    </body>
+</html>
